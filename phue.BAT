@@ -1,1 +1,1 @@
-py -W ignore C:\Dev\Python\PhilipsHueClient\ph_cli.py %*
+py -W ignore %~dp0ph_cli.py %*

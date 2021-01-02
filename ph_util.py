@@ -10,6 +10,7 @@ import os
 
 credsApp = 'philipsHue'
 credsUser = 'phue-app'
+configFileName = 'ph_config.properties'
 
 
 def executeGet(url):
@@ -60,5 +61,5 @@ def setUsername():
 
 def getHost():
     config = configparser.RawConfigParser()
-    config.read(os.path.dirname(__file__)+'/ph_config.properties')
+    config.read(os.path.dirname(__file__)+'/'+configFileName)
     return config.get('Config', 'host')

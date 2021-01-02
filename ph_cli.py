@@ -1,18 +1,10 @@
 import sys
-
 from ph_util import getLightsInfo
 from ph_util import getGroupsInfo
 from ph_util import toggleLight
 from ph_util import toggleGroup
-# List lights
-# List groups
-# toggle light
-# toggle groups
-# TODO: Adjust colors
 
 
-# for arg in sys.argv:
-#     print(arg)
 def handleArgs():
     print("-------------------------")
     args = sys.argv
