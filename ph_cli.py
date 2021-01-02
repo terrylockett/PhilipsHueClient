@@ -29,7 +29,7 @@ def handleArgs():
 
 
 def handleLights(args):
-    if(len(args) <= 3):
+    if(len(args) <= 2):
         sys.exit("'lights' required more params..")
 
     lights = getLightsInfo()
@@ -59,7 +59,7 @@ def handleLights(args):
 
 
 def handleGroups(args):
-    if(len(args) <= 3):
+    if(len(args) <= 2):
         sys.exit("'groups' required more params..")
 
     groups = getGroupsInfo()

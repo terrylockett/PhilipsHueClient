@@ -6,6 +6,7 @@ import requests
 import sys
 import getpass
 import configparser
+import os
 
 credsApp = 'philipsHue'
 credsUser = 'phue-app'
@@ -59,5 +60,5 @@ def setUsername():
 
 def getHost():
     config = configparser.RawConfigParser()
-    config.read('ph_config.properties')
+    config.read(os.path.dirname(__file__)+'/ph_config.properties')
     return config.get('Config', 'host')
