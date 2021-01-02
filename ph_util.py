@@ -55,7 +55,6 @@ def setUsername():
     print("Enter username for api")
     passwd = getpass.getpass()
     keyring.set_password(credsApp, credsUser, passwd)
-    print("username is:", passwd)
 
 
 def getHost():
