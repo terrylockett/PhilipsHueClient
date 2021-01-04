@@ -44,28 +44,42 @@ def addGroupTiles(parent_widget):
         child.destroy()
     groups = getGroupsInfo()
     for id in groups.keys():
-        makeGroupTile(parent_widget, groups[id]["name"], id, groups[id]["lights"])
+        makeGroupTile(parent_widget, groups[id]["name"], id,
+                      groups[id]["lights"], groups[id]['state']['any_on'])
 
 
-def showLights(parent_widget, lightList):
+def addLights(parent_widget, lightList):
     for child in getChildren(parent_widget):
         child.destroy()
     lights = getLightsInfo()
     for id in lights.keys():
         if(id in lightList):
-            makeTile(parent_widget, lights[id]["name"], id, {}, lights[id]['state']['on'])
+            makeTile(parent_widget, lights[id]["name"], id, {}, lights[id]['state']['on'], False)
 
 
-def toggleButtonPress(widgit_main, widgit_toggle, id):
+def mainButtonPressed(parent_widget, lightList, is_group):
+    if(is_group):
+        addLights(parent_widget, lightList)
+    else:
+        print("Light main button pressed... do nothing.")
+
+
+def toggleButtonPress(widgit_main, widgit_toggle, id, isGroup):
     if(widgit_main["bg"] == color_tile_bg_enabled):
-        toggleLight(id, False)
+        if(isGroup):
+            toggleGroup(id, False)
+        else:
+            toggleLight(id, False)
         widgit_main["bg"] = color_tile_bg
         widgit_main["fg"] = color_tile_fg
         widgit_toggle['text'] = 'Turn On'
         widgit_main.bind('<Enter>', lambda x: setTileBg(widgit_main, color_button_hover_bg, True))
         widgit_main.bind('<Leave>', lambda x: setTileBg(widgit_main, color_tile_bg, True))
     else:
-        toggleLight(id, True)
+        if(isGroup):
+            toggleGroup(id, True)
+        else:
+            toggleLight(id, True)
         widgit_main['bg'] = color_tile_bg_enabled
         widgit_main['fg'] = color_tile_fg_enabled
         widgit_toggle['text'] = 'Turn Off'
@@ -73,7 +87,7 @@ def toggleButtonPress(widgit_main, widgit_toggle, id):
         widgit_main.bind('<Leave>', lambda x: setTileBg(widgit_main, color_tile_bg_enabled, True))
 
 
-def makeTile(parent_widget, labelText, id, list, is_enabled):
+def makeTile(parent_widget, labelText, id, list, is_enabled, is_group):
     temp_bg_color = color_tile_bg
     temp_fg_color = color_tile_fg
     if(is_enabled):
@@ -88,15 +102,17 @@ def makeTile(parent_widget, labelText, id, list, is_enabled):
 
     # main buttn
     main_button = tk.Button(frame, text=labelText, height=tile_height,
-                            command=lambda: showLights(parent_widget, list),
-                            bg=temp_bg_color, fg=temp_fg_color, activebackground='green', relief='flat')
+                            command=lambda: mainButtonPressed(parent_widget, list, is_group),
+                            bg=temp_bg_color, fg=temp_fg_color, activebackground='green', relief='flat',
+                            )
     main_button.grid(row=0, column=0, sticky='ew')
     main_button.bind('<Enter>', lambda x: setTileBg(main_button, color_button_hover_bg, True))
     main_button.bind('<Leave>', lambda x: setTileBg(main_button, temp_bg_color, True))
 
     # toggle
     toggle_button = tk.Button(frame, text='Turn Off', height=tile_height,
-                              command=lambda: toggleButtonPress(main_button, toggle_button, id),
+                              command=lambda: toggleButtonPress(
+                                  main_button, toggle_button, id, is_group),
                               bg=color_tile_bg, fg=color_tile_fg)
     toggle_button.grid(row=0, column=1)
     toggle_button.bind('<Enter>', lambda x: setTileBg(toggle_button, color_button_hover_bg, True))
@@ -109,6 +125,10 @@ def makeTile(parent_widget, labelText, id, list, is_enabled):
     return frame
 
 
+def makeGroupTile(parent_widget, labelText, row_, lightList, is_any_on):
+    makeTile(parent_widget, labelText, row_, lightList, is_any_on, True)
+
+
 def createHeaderButton(parent, text, command_):
     newButton = tk.Button(parent, text=text, padx=2, pady=2, bd=0, command=command_,
                           bg=color_header_bg, fg=color_button_fg, highlightcolor=color_button_press_bg,
@@ -117,7 +137,3 @@ def createHeaderButton(parent, text, command_):
     newButton.bind('<Enter>', lambda x: setTileBg(newButton, color_button_hover_bg, False))
     newButton.bind('<Leave>', lambda x: setTileBg(newButton, color_header_bg, False))
     return newButton
-
-
-def makeGroupTile(parent_widget, labelText, row_, lightList):
-    makeTile(parent_widget, labelText, row_, lightList, False)
