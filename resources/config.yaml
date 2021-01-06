@@ -1,0 +1,6 @@
+host: 'https://192.168.2.10/api/'
+
+# UI Config
+window_icon: 'resources/icon.ico'
+window_size: '400x900'
+window_title: 'Phillips Hue'

@@ -25,7 +25,7 @@ windll.shcore.SetProcessDpiAwareness(1)
 root = tk.Tk()
 root.title("Philips Hue")
 root.geometry("400x900")
-root.iconbitmap("icon.ico")
+root.iconbitmap("resources/icon.ico")
 root["bg"] = color_bg
 
 
