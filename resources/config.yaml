@@ -1,4 +1,4 @@
-host: 'https://192.168.2.10/api/'
+host: 'https://x.x.x.x/api/'
 
 # UI Config
 window_icon: 'resources/icon.ico'
