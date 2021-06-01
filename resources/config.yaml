@@ -1,0 +1,6 @@
+host: 'https://x.x.x.x/api/'
+
+# UI Config
+window_icon: 'resources/icon.ico'
+window_size: '400x900'
+window_title: 'Phillips Hue'

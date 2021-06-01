@@ -1,7 +1,7 @@
-from ph_util import toggleGroup
-from ph_util import toggleLight
-from ph_util import getGroupsInfo
-from ph_util import getLightsInfo
+from util.ph_util import toggleGroup
+from util.ph_util import toggleLight
+from util.ph_util import getGroupsInfo
+from util.ph_util import getLightsInfo
 from ph_ui_util import addSettingTiles
 from ph_ui_util import addGroupTiles
 import tkinter as tk
@@ -25,7 +25,7 @@ windll.shcore.SetProcessDpiAwareness(1)
 root = tk.Tk()
 root.title("Philips Hue")
 root.geometry("400x900")
-root.iconbitmap("icon.ico")
+root.iconbitmap("resources/icon.ico")
 root["bg"] = color_bg
 
 
