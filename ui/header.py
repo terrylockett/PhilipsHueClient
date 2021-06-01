@@ -5,6 +5,7 @@ from ui.phui_colors import PHColors
 class Header:
     def __init__(self, root_widgit):
         print("In header constructor")
+        self.tiles = None
         self.frame = tk.LabelFrame(root_widgit, padx=5, pady=5, bd=0, bg=PHColors.header_background)
         self.frame.columnconfigure(2, weight=1)
         self.frame.pack(fill='x', side='top')
@@ -13,15 +14,23 @@ class Header:
         createSettingsButton(self, self.frame)
         createHomeButton(self, self.frame)
 
+        @property
+        def tiles(self):
+            return self.tiles
+
+        @tiles.setter
+        def tiles(self, _tiles):
+            self.tiles = _tiles
+
 
 def createSettingsButton(self, parent_widgit):
-    newButton = createHeaderButton(parent_widgit, 'Settings')
+    newButton = createHeaderButton(parent_widgit, 'Settings', lambda: print('f'))
     newButton.grid(row=0, column=0, sticky='w')
     self.buttons.append(newButton)
 
 
 def createHomeButton(self, parent_widgit):
-    newButton = createHeaderButton(parent_widgit, 'Home')
+    newButton = createHeaderButton(parent_widgit, 'Home', lambda: self.tiles.goHome())
     newButton.grid(row=0, column=2, sticky='e')
     self.buttons.append(newButton)
 
@@ -30,9 +39,9 @@ def setButtonBackground(button, color):
     button['background'] = color
 
 
-def createHeaderButton(parent, text):
+def createHeaderButton(parent, text, _command):
     newButton = tk.Button(parent, text=text, padx=2, pady=2, bd=0,
-                          #  command=command_,
+                          command=_command,
                           bg=PHColors.header_background, fg=PHColors.header_button_foreground,
                           highlightcolor=PHColors.heaer_button_press_background,
                           #  activebackground=color_button_press_bg, activeforeground=color_button_press_fg,

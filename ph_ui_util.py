@@ -1,8 +1,8 @@
 import tkinter as tk
-from ph_util import getLightsInfo
-from ph_util import getGroupsInfo
-from ph_util import toggleLight
-from ph_util import toggleGroup
+from util.ph_util import getLightsInfo
+from util.ph_util import getGroupsInfo
+from util.ph_util import toggleLight
+from util.ph_util import toggleGroup
 
 color_bg = '#151515'
 color_header_bg = '#242424'

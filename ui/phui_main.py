@@ -1,6 +1,7 @@
 from ctypes import windll
 from ui.phui_colors import PHColors
 from ui.header import Header
+from ui.tiles import Tiles
 import tkinter as tk
 import util.configLoader as config
 
@@ -15,5 +16,8 @@ def run():
     root["bg"] = PHColors.background
 
     header = Header(root)
+    tilesObj = Tiles(root)
+
+    header.tiles = tilesObj
 
     root.mainloop()

@@ -42,8 +42,24 @@ def toggleLight(id, on):
     executePut(buildUrl("/lights/"+str(id)+"/state"), data=json.dumps({"on": on}))
 
 
+def toggleLightOn(id):
+    lights = getLightsInfo()
+    if(lights[id]['state']['on']):
+        toggleLight(id, False)
+    else:
+        toggleLight(id, True)
+
+
 def toggleGroup(id, on):
     executePut(buildUrl("/groups/"+str(id)+"/action"), data=json.dumps({"on": on}))
+
+
+def toggleGroupOn(id):
+    groups = getGroupsInfo()
+    if(groups[id]['state']['all_on']):
+        toggleGroup(id, False)
+    else:
+        toggleGroup(id, True)
 
 
 def getUsername():
