@@ -6,6 +6,7 @@ import requests
 import sys
 import getpass
 from util.configLoader import getProperty
+from util.configLoader import setProperty
 
 credsApp = 'philipsHue'
 credsUser = 'phue-app'
@@ -75,3 +76,6 @@ def setUsername():
 
 def getHost():
     return getProperty('host')
+
+def setHost(host):
+    setProperty('host', host)

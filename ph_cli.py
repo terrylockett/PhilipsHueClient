@@ -3,6 +3,8 @@ from util.ph_util import getLightsInfo
 from util.ph_util import getGroupsInfo
 from util.ph_util import toggleLight
 from util.ph_util import toggleGroup
+from util.ph_util import getHost
+from util.ph_util import setHost
 
 
 def handleArgs():
@@ -12,12 +14,23 @@ def handleArgs():
         print("help info here... TODO")
         return
 
+    if(args[1] == "configure"):
+        handleConfigure(args)
+    elif(getHost() == 'https://x.x.x.x/api/'):
+        print('Hue Bridge IP is not set, run \'phue configure\' to set shit up.')
+
+
     if(args[1] == "lights"):
         handleLights(args)
     elif(args[1] == "groups"):
         handleGroups(args)
 
 # blah
+
+
+def handleConfigure(args):
+    text = input("Bridge IP: ")
+    setHost(text)
 
 
 def handleLights(args):
