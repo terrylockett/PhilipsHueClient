@@ -5,6 +5,8 @@ from util.ph_util import toggleLight
 from util.ph_util import toggleGroup
 from util.ph_util import getHost
 from util.ph_util import setHost
+from util.ph_util import getUsername
+from util.ph_util import setUsername
 
 
 def handleArgs():
@@ -29,8 +31,13 @@ def handleArgs():
 
 
 def handleConfigure(args):
-    text = input("Bridge IP: ")
-    setHost(text)
+    text = input("Bridge IP(leave blank to skip): ")
+    if( '' != text):
+        setHost(text)
+
+    text = input("bridge api token(leave blank to skip): ")
+    if( '' != text):
+        setUsername(text)
 
 
 def handleLights(args):
