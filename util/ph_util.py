@@ -67,15 +67,12 @@ def getUsername():
     return keyring.get_password(credsApp, credsUser)
 
 
-def setUsername():
-    # TODO update this to hit new user api
-    print("Enter username for api")
-    passwd = getpass.getpass()
-    keyring.set_password(credsApp, credsUser, passwd)
+def setUsername(token):
+    keyring.set_password(credsApp, credsUser, token)
 
 
 def getHost():
     return getProperty('host')
 
 def setHost(host):
-    setProperty('host', host)
+    setProperty('host', 'https://'+host+'/api/')
